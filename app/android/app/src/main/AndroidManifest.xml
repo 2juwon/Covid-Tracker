@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.checkflow">
+    package="leessang.app.covidtracker">
    <application
-        android:label="checkflow"
+        android:label="Covid Tracker"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
@@ -37,5 +37,11 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+
+       <meta-data
+           android:name="com.naver.maps.map.CLIENT_ID"
+           android:value="yqzkt8lqam" />
     </application>
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 </manifest>
