@@ -1,7 +1,6 @@
 import json
 import requests
 import urllib3
-import re
 
 urllib3.disable_warnings()
 
@@ -18,15 +17,8 @@ naver_header_map = {
 }
 
 def parse_geocode(address):
-    # print(address)
-
     query = requests.utils.quote(address)
     url = f'https://naveropenapi.apigw.ntruss.com/map-geocode/v2/geocode?query={query}'
-    data = {
-        "query": address
-    }
-
-    # print(url)
 
     try:
         response = requests.get(url, headers=naver_header_map, verify=False, timeout=5)
@@ -48,7 +40,6 @@ def parse_geocode(address):
 
     except requests.exceptions.SSLError as sslerror:
         print("SSL Error : ", sslerror)
-        close()
 
     except requests.exceptions.ConnectionError as connectionerror:
         print("Connection Error : ", connectionerror)
