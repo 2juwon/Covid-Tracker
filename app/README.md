@@ -17,6 +17,8 @@ Flutter로 제작하였습니다.
 - [How to use Naver Map Plguin](https://marrrang.tistory.com/m/27)
 
 ## 실행 참고사항
+```
 Error: Cannot run with sound null safety, because the following dependencies
 don't support null safety: - package:naver_map_plugin
+```
 [해결방법](https://hanco.tistory.com/17)
