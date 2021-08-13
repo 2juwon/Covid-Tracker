@@ -5,11 +5,13 @@ class MapPage extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Covid Tracker',
-      home: NaverMap(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Naver Map'),
+      ),
+      body: NaverMap(
         initialCameraPosition: CameraPosition(
-          target: LatLng(35.3226551, 127.7861468),
+          target: LatLng(35.22662, 128.87227),
           zoom: 17,
         ),
         initLocationTrackingMode:
