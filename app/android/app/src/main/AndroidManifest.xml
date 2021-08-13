@@ -42,6 +42,6 @@
            android:name="com.naver.maps.map.CLIENT_ID"
            android:value="yqzkt8lqam" />
     </application>
-
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 </manifest>
