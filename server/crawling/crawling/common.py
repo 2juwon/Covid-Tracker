@@ -2,8 +2,7 @@ from datetime import date
 from os import replace
 import re
 
-# "2021.8.4(수) 11:16~14:35"
-# "7.29(목) 14:00분경 현금수납 손님태운 택시기사"
+# Ref. https://regexr.com/
 def extract_date(src):
     # date
     # matches = datefinder.find_dates(src)
@@ -13,15 +12,17 @@ def extract_date(src):
     # if(idx >= 0):
     #     src = src[idx:]
 
-    print(src)
-    m = re.search(r"\d{2}(?:\d{2})?.\d{1,2}.\d{1,2}", string=src)
+    m = re.findall(r"\d{2}(?:\d{2})?[.]\d{1,2}[.]\d{1,2}", string=src)
+    prefix = ''
+    if len(m) == 0:
+        m = re.findall(r"\d{1,2}[.]\d{1,2}",string=src)        
+        prefix = '2021.'
+
     if m:
-        print('FMath found: ', m.group())
-        return m.group()
-    else:
-        m = re.search(r"\d{1,2}.\d{1,2}",string=src)
-        if m:
-            print('SMath found: ', m.group())
-            return f'2021.{m.group()}'
-        else:
-            print('No match')
+        dates = []
+        for date in m:
+            dates.append(f'{prefix}{date}')
+        
+        return dates
+
+print(extract_date('8.8(일) 18:42-20:12 8.9(월) 14:24-16:53'))

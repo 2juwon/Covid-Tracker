@@ -5,8 +5,8 @@ import urllib3
 urllib3.disable_warnings()
 
 naver_client_info = {
-    "ID" : 'yqzkt8lqam',
-    "SECRET" : 'RtiiXX9xPfpduPA1RWd85AEG65IGaZwv5VUtHESd'
+    "ID": 'yqzkt8lqam',
+    "SECRET": 'RtiiXX9xPfpduPA1RWd85AEG65IGaZwv5VUtHESd'
 }
 
 naver_header_map = {
@@ -16,12 +16,17 @@ naver_header_map = {
     "X-NCP-APIGW-API-KEY": naver_client_info["SECRET"]
 }
 
-def parse_geocode(address):
+
+def get_geocode(address):
+    if(address == ''):
+        return None
+        
     query = requests.utils.quote(address)
     url = f'https://naveropenapi.apigw.ntruss.com/map-geocode/v2/geocode?query={query}'
 
     try:
-        response = requests.get(url, headers=naver_header_map, verify=False, timeout=5)
+        response = requests.get(
+            url, headers=naver_header_map, verify=False, timeout=5)
 
         try:
             json_data = json.loads(response.text)
@@ -30,11 +35,11 @@ def parse_geocode(address):
                 for address in addresses:
                     x = address.get("x")
                     y = address.get("y")
-                    return {'lon' : x, 'lat' : y}
+                    return {'lon': x, 'lat': y}
         except json.decoder.JSONDecodeError as decodeerror:
             print("JSONDecodeError : ", decodeerror)
             print("JSON string : ", response.text)
-            
+
     except requests.exceptions.Timeout as timeouterror:
         print("Timeout Error : ", timeouterror)
 
@@ -43,7 +48,7 @@ def parse_geocode(address):
 
     except requests.exceptions.ConnectionError as connectionerror:
         print("Connection Error : ", connectionerror)
-        # See psf/requests#5430 to know why this is necessary.                
+        # See psf/requests#5430 to know why this is necessary.
 
     except requests.exceptions.HTTPError as httperror:
         print("Http Error : ", httperror)
